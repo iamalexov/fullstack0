@@ -18,7 +18,7 @@ sequenceDiagram
     
     
     user-->>server:GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    server-->>user:the css file
+    server-->>user:https://studies.cs.helsinki.fi/exampleapp/data.json 
      user-->>server:[{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
 
     activate server
