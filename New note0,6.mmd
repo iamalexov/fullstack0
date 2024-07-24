@@ -1,1 +1,8 @@
-Make a diagram of the situation where the user creates a new note in the single page version.
+sequenceDiagram
+    participant browser
+    participant server
+
+
+    browser->>server:get https://studies.cs.helsinki.fi/exampleapp/spa
+    server-->>browser:the request was successfully
+   
