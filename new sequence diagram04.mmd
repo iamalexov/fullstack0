@@ -1,28 +1,41 @@
 sequenceDiagram
+    actor user
     participant browser
     participant server
     participant login page
-    participant user
+
     
+    user->>login page:visit
+    activate login page
+    login page-->>server: login
+    deactivate login page
+
+    server->server:validate login
+    server-->>user:user acepted(message)
+
+    user->>browser:set login
+
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
     deactivate server
     
-
-    
-    browser->>login page: GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    activate login page
-    login page-->>user: login
-    deactivate login page
-    
-    
-    user-->>server:GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    server-->>user:https://studies.cs.helsinki.fi/exampleapp/data.json 
-     user-->>server:[{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
-
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
-    server-->>browser: 
+    server-->>browser: the css file
     deactivate server
-
     
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+    
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2024-07-24" }, ... ]
+    deactivate server    
+
+    Note right of browser: The browser executes the callback function that renders the notes 
